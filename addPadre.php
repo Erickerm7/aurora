@@ -59,6 +59,3 @@ $stmt->close();
 
 // Cerramos la conexión
 mysqli_close($con);
-
-
-
