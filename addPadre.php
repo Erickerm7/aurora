@@ -3,6 +3,19 @@
 // Requerimos el archivo para la conexión a la base de datos
 require_once './conexion/';
 
+// Declaramos todas las variables en caso de que vengan vacías
+$DPI = "";
+$primerNombre = "";
+$segundoNombre = "";
+$primerApellido = "";
+$segundoApellido = "";
+$direccion = "";
+$telefono = "";
+$profesion = "";
+$direccionTrabajo = "";
+$telefonoTrabajo = "";
+$correoElectronico = "";
+
 // Variables para recuperar el DPI
 $DPI = filter_input(INPUT_POST, 'DPI');
 
@@ -31,6 +44,21 @@ $telefonoTrabajo = filter_input(INPUT_POST, 'telefonoTrabajo');
 
 // Variable para recuperar el correo electrónico del padre
 $correoElectronico = filter_input(INPUT_POST, 'correoElectronico');
+
+// Query para hacer la inserción
+$stmt = $mysqli->prepare("INSERT INTO encargado (DPI, PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, DIRECCION, TELEFONO, PROFESION, DIRECCION_TRABAJO, TELEFONO_TRABAJO, CORREO_ELECTRONICO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+// Agregamos los parámetros
+$stmt->bind_param($DPI, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $direccion, $telefono, $profesion, $direccionTrabajo, $telefonoTrabajo, $correoElectronico);
+
+// Ejecutamos el query
+$stmt->execute();
+
+// Cerramos el estado
+$stmt->close();
+
+// Cerramos la conexión
+mysqli_close($con);
 
 
 
