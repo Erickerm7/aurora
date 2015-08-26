@@ -55,6 +55,7 @@ $stmt->bind_param("sssssssssss", $DPI, $primerNombre, $segundoNombre, $primerApe
 // Ejecutamos el query
 $stmt->execute();
 
+echo $stmt->affected_rows;
 // Cerramos el estado
 $stmt->close();
 
