@@ -3,6 +3,6 @@
         <title>SIGEPSA</title>
     </head>
     <body>
-        <a href="padres.php">Padres</a>
+        <a href="formPadres.php">Padres</a>
     </body>
 </html>
