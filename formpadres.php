@@ -46,6 +46,10 @@
         </form>
 
 
+<form action="file-upload.php" method="post" enctype="multipart/form-data">
+    <input type="file" name="uploads[]" multiple>
+    <input type="submit" name="submit" value="Submit" />
+</form> 
 
     </body>
 </html>
