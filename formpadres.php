@@ -9,6 +9,9 @@
 
         <form action="addPadre.php" method="post" name="Padre">
 
+            <label>DPI</label>
+            <input name="DPI" type="text" size="15" maxlength="50">
+            
             <label>Primer Nombre</label>
             <input name="primerNombre" type="text" size="15" maxlength="50">
 

@@ -14,6 +14,15 @@ $direccionTrabajo = "";
 $telefonoTrabajo = "";
 $correoElectronico = "";
 
+// Requerimos el archivo para la conexión a la base de datos
+require_once './conexion/conexion.php';
+
+// Query para hacer la inserción
+$stmt = $conn->prepare("INSERT INTO encargado (DPI, PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, DIRECCION, TELEFONO, PROFESION, DIRECCION_TRABAJO, TELEFONO_TRABAJO, CORREO_ELECTRONICO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+// Agregamos los parámetros
+$stmt->bind_param("sssssssssss", $DPI, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $direccion, $telefono, $profesion, $direccionTrabajo, $telefonoTrabajo, $correoElectronico);
+
 // Variables para recuperar el DPI
 $DPI = filter_input(INPUT_POST, 'DPI');
 
@@ -43,17 +52,10 @@ $telefonoTrabajo = filter_input(INPUT_POST, 'telefonoTrabajo');
 // Variable para recuperar el correo electrónico del padre
 $correoElectronico = filter_input(INPUT_POST, 'correoElectronico');
 
-// Requerimos el archivo para la conexión a la base de datos
-require_once './conexion/conexion.php';
-
-// Query para hacer la inserción
-$stmt = $conn->prepare("INSERT INTO encargado (DPI, PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, DIRECCION, TELEFONO, PROFESION, DIRECCION_TRABAJO, TELEFONO_TRABAJO, CORREO_ELECTRONICO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-// Agregamos los parámetros
-$stmt->bind_param("sssssssssss", $DPI, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $direccion, $telefono, $profesion, $direccionTrabajo, $telefonoTrabajo, $correoElectronico);
-
 // Ejecutamos el query
-$stmt->execute();
+if(!$stmt->execute()){
+    echo $stmt->error;
+};
 
 echo $stmt->affected_rows;
 // Cerramos el estado
